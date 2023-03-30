@@ -55,7 +55,7 @@ class Rent_Vehicle(APIView):
             user = user,
             amount_payable = vehicle.rent_per_day*days,
             booked_on = timezone.now,
-            returned_on = timezone.now + timedelta(days=days)
+            returned_on = timezone.now + timezone.timedelta(days=days)
         )
         vehicle_log.save()
         serializer = UserVehicleLogSerializer(vehicle_log)
