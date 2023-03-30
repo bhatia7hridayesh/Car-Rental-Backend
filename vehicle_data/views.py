@@ -54,12 +54,12 @@ class Rent_Vehicle(APIView):
             returned_on = timezone.now + datetime.timedelta(days=days)
         )
         vehicle_log.save()
-        serializer = VehicleLogSerializer(vehicle_log)
+        serializer = UserVehicleLogSerializer(vehicle_log)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 class My_Bookings(APIView):
     permission_classes = [permissions.IsAuthenticated, IsUser]
-    serializer_class = VehicleLogSerializer
+    serializer_class = UserVehicleLogSerializer
     def get(self, request):
         queryset = Vehicle_Bookings_Log.objects.filter(user=request.user)
         serializer = self.serializer_class(queryset, many=True)
