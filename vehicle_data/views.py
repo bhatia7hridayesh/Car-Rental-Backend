@@ -54,7 +54,7 @@ class Rent_Vehicle(APIView):
             vehicle = vehicle,
             user = user,
             amount_payable = vehicle.rent_per_day*days,
-            booked_on = timezone.now,
+            booked_on = datetime.now(),
             returned_on = datetime.now() + timedelta(days=5)
         )
         vehicle_log.save()
