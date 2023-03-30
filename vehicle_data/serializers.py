@@ -33,6 +33,7 @@ class AvailableVehiclesSerializer(serializers.ModelSerializer):
 class VehicleLogSerializer(serializers.ModelSerializer):
     vehicle = serializers.SerializerMethodField()
     booked_on = serializers.SerializerMethodField()
+    returned_on = serializers.SerializerMethodField()
     def get_vehicle(self,obj):
         res = {}
         res["vehicle_model"] = obj.vehicle.Vehicle_model
@@ -41,6 +42,8 @@ class VehicleLogSerializer(serializers.ModelSerializer):
         return res
     def get_booked_on(self, obj):
         return obj.booked_on.astimezone(pytz.timezone('Asia/Calcutta')).strftime("%A %m %Y")
+    def get_returned_on(self, obj):
+        return obj.returned_on.astimezone(pytz.timezone('Asia/Calcutta')).strftime("%A %m %Y")
     class Meta : 
         model = Vehicle_Bookings_Log
         fields = ["id" ,"booked_on","returned_on","amount_payable","vehicle"]
@@ -48,6 +51,9 @@ class VehicleLogSerializer(serializers.ModelSerializer):
 class UserVehicleLogSerializer(serializers.ModelSerializer):
     vehicle = serializers.SerializerMethodField()
     booked_on = serializers.SerializerMethodField()
+    returned_on = serializers.SerializerMethodField()
+    def get_returned_on(self, obj):
+        return obj.returned_on.astimezone(pytz.timezone('Asia/Calcutta')).strftime("%A %m %Y")
     def get_vehicle(self,obj):
         res = {}
         res["vehicle_model"] = obj.vehicle.Vehicle_model
