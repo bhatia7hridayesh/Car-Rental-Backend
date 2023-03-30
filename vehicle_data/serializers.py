@@ -74,3 +74,8 @@ class MyVehiclesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
         fields = ['Vehicle_model', 'Vehicle_number', 'seating_capacity', 'rent_per_day', 'agency', 'is_booked']
+
+class UpdateVehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vehicle
+        fields = ['Vehicle_model', 'Vehicle_number', 'seating_capacity', 'rent_per_day']

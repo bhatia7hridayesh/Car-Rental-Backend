@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.views import APIView
 from .serializers import *
 from authentication_app.permissions import *
@@ -34,7 +34,10 @@ class Available_Vehicles(ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-
+class Update_Vehicle(UpdateAPIView):
+    serializer_class = UpdateVehicleSerializer
+    permission_classes = [permissions.IsAuthenticated, IsAgency]
+    queryset = Vehicle.objects.all()
 #User APIs
 class Rent_Vehicle(APIView):
     permission_classes = [permissions.IsAuthenticated ,IsUser]
