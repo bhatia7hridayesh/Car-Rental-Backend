@@ -73,7 +73,7 @@ class MyVehiclesSerializer(serializers.ModelSerializer):
         return obj.agency.full_name
     class Meta:
         model = Vehicle
-        fields = ['Vehicle_model', 'Vehicle_number', 'seating_capacity', 'rent_per_day', 'agency', 'is_booked']
+        fields = ['id' , 'Vehicle_model', 'Vehicle_number', 'seating_capacity', 'rent_per_day', 'agency', 'is_booked']
 
 class UpdateVehicleSerializer(serializers.ModelSerializer):
     class Meta:
