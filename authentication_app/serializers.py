@@ -30,3 +30,8 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
+class UserDetails(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["full_name", "email", "phone","user_type"]
