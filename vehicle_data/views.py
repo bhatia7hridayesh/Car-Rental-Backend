@@ -58,6 +58,7 @@ class Rent_Vehicle(APIView):
             returned_on = datetime.now() + timedelta(days=5)
         )
         vehicle_log.save()
+        vehicle.save()
         serializer = UserVehicleLogSerializer(vehicle_log)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
