@@ -7,7 +7,7 @@ from rest_framework import permissions, status
 from rest_framework.response import Response
 from .models import * 
 from django.utils import timezone
-from datetime import timedelta
+from datetime import datetime, timedelta
 # Create your views here.
 
 #Agency APIs
@@ -55,7 +55,7 @@ class Rent_Vehicle(APIView):
             user = user,
             amount_payable = vehicle.rent_per_day*days,
             booked_on = timezone.now,
-            returned_on = timezone.now() + timezone.timedelta(days=days)
+            returned_on = datetime.now() + timedelta(days=5)
         )
         vehicle_log.save()
         serializer = UserVehicleLogSerializer(vehicle_log)
