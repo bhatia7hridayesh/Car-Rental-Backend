@@ -19,7 +19,7 @@ class My_Vehicles(APIView):
     serializer_class = MyVehiclesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAgency]
     def get(self, request):
-        queryset = Vehicle.objects.filter(vehicle__agency=request.user)
+        queryset = Vehicle.objects.filter(agency=request.user)
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
