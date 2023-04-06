@@ -15,10 +15,13 @@ class Create_Vehicle(CreateAPIView):
     serializer_class = VehicleCreateSerializer
     permission_classes = [permissions.IsAuthenticated, IsAgency]
 
-class My_Vehicles(ListAPIView):
-    queryset = Vehicle.objects.filter(is_booked=False)
+class My_Vehicles(APIView):
     serializer_class = MyVehiclesSerializer
     permission_classes = [permissions.IsAuthenticated, IsAgency]
+    def get(self, request):
+        queryset = Vehicle.objects.filter(vehicle__agency=request.user)
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class Bookings_history(APIView):
     serializer_class = VehicleLogSerializer
